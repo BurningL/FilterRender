@@ -139,11 +139,11 @@
 - (void)renderTextureWithId:(GLuint)textureId{
     [GPUImageContext setActiveShaderProgram:self->normalProgram];
     
-    glActiveTexture(GL_TEXTURE5);
+    glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, textureId);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    glUniform1i(self->inputTextureUniform,5);
+    glUniform1i(self->inputTextureUniform,0);
     
     static const GLfloat squareVertices[] = {
         -1.0f, -1.0f,

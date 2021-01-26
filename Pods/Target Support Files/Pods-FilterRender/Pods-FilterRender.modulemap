@@ -1,0 +1,6 @@
+framework module Pods_FilterRender {
+  umbrella header "Pods-FilterRender-umbrella.h"
+
+  export *
+  module * { export * }
+}

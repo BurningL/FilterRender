@@ -18,6 +18,17 @@
 
 @implementation HYRenderManager
 
+static HYRenderManager *manager;
++ (instancetype)shareManager {
+    if (manager == nil) {
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            manager = [HYRenderManager new];
+        });
+    }
+    return manager;
+}
+
 
 #pragma mark - Lut
 
@@ -40,16 +51,20 @@
 
 
 #pragma mark - 绿幕
-static HYRenderManager *manager;
-+ (instancetype)shareManager {
-    if (manager == nil) {
-        static dispatch_once_t onceToken;
-        dispatch_once(&onceToken, ^{
-            manager = [HYRenderManager new];
-        });
-    }
-    return manager;
+- (void)showGreenScreenWithImage:(UIImage *)image
+{
+    [self.renderer showGreenScreenWithImage:image];
 }
+
+- (void)showGreenScreenWithVideoUrl:(NSURL *)videoUrl
+{
+    [self.renderer showGreenScreenWithVideoUrl:videoUrl];
+}
+
+- (void)cleanGreenScreen{
+    [self.renderer cleanGreenScreen];
+}
+
 
 - (void)loadAllItems
 {

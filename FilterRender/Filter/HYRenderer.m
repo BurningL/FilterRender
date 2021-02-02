@@ -9,8 +9,15 @@
 #import "HYRenderer.h"
 #import <GPUImage.h>
 #import <OpenGLES/ES2/gl.h>
+#import "GPUImageGreenScreenFilter.h"
 
-@interface HYRenderer ()
+typedef NS_ENUM(NSInteger,HYRendererGreenScreenType){
+    HYRendererGreenScreenTypeNone,
+    HYRendererGreenScreenTypePicture,
+    HYRendererGreenScreenTypeVideo,
+};
+
+@interface HYRenderer ()<GPUImageTextureOutputDelegate>
 {
     GLProgram *normalProgram;
     GLint positionAttribute;
@@ -19,7 +26,13 @@
 }
 @property (nonatomic, strong) GPUImageRawDataInput *dataInput;
 @property (nonatomic, strong) GPUImageTextureOutput *textureOutput;
-@property (nonatomic, strong) GPUImageToonFilter *filter;
+@property (nonatomic, strong) GPUImageGreenScreenFilter *blendFilter;
+@property (nonatomic, strong) GPUImageFilter *filter;
+//@property (nonatomic, strong) GPUImageToonFilter *filter;
+@property (nonatomic, strong) GPUImagePicture *inputPicture;
+@property (nonatomic, strong) GPUImageMovie *gpuMovie;
+
+@property (nonatomic,assign) HYRendererGreenScreenType greenScreenType;
 
 @property (nonatomic, assign) CVOpenGLESTextureCacheRef textureCache;
 @property (nonatomic, assign) CVOpenGLESTextureRef renderTexture;
@@ -41,11 +54,76 @@
 
 - (void)setupFilters{
     self.dataInput = [[GPUImageRawDataInput alloc] initWithBytes:nil size:CGSizeZero pixelFormat:GPUPixelFormatBGRA type:GPUPixelTypeUByte];
-    self.filter = [[GPUImageToonFilter alloc] init];
+    self.filter = [[GPUImageFilter alloc] init];
+    self.blendFilter = [[GPUImageGreenScreenFilter alloc] init];
     self.textureOutput = [[GPUImageTextureOutput alloc] init];
+    self.textureOutput.delegate = self;
+    self.greenScreenType = HYRendererGreenScreenTypeNone;
+}
+
+- (void)showGreenScreenWithImage:(UIImage *)image{
+    self.inputPicture = [[GPUImagePicture alloc] initWithImage:image smoothlyScaleOutput:YES];
+    self.greenScreenType = HYRendererGreenScreenTypePicture;
+}
+
+- (void)showGreenScreenWithVideoUrl:(NSURL *)videoUrl{
+    self.gpuMovie = [[GPUImageMovie alloc] initWithURL:videoUrl];
+    self.gpuMovie.playAtActualSpeed = YES;
+    self.gpuMovie.shouldRepeat = YES;
+    self.greenScreenType = HYRendererGreenScreenTypeVideo;
+}
+
+- (void)setGreenScreenType:(HYRendererGreenScreenType)greenScreenType
+{
+    _greenScreenType = greenScreenType;
     
-    [self.dataInput addTarget:self.filter];
-    [self.filter addTarget:self.textureOutput];
+    [self.dataInput removeAllTargets];
+    [self.filter removeAllTargets];
+    [self.inputPicture removeAllTargets];
+    [self.gpuMovie removeAllTargets];
+    
+    switch (greenScreenType) {
+        case HYRendererGreenScreenTypeNone:{
+            [self.dataInput addTarget:self.filter];
+            [self.filter addTarget:self.textureOutput];
+        }break;
+        case HYRendererGreenScreenTypePicture:{
+            [self.dataInput addTarget:self.blendFilter];
+            [self.inputPicture addTarget:self.blendFilter];
+            [self.blendFilter addTarget:self.filter];
+            [self.filter addTarget:self.textureOutput];
+            runSynchronouslyOnVideoProcessingQueue(^{
+                [self.gpuMovie cancelProcessing];
+                [self.inputPicture processImage];
+            });
+
+        }break;
+        case HYRendererGreenScreenTypeVideo:{
+            [self.dataInput addTarget:self.blendFilter];
+            [self.gpuMovie addTarget:self.blendFilter];
+            [self.blendFilter addTarget:self.filter];
+            [self.filter addTarget:self.textureOutput];
+            runSynchronouslyOnVideoProcessingQueue(^{
+                [self.gpuMovie startProcessing];
+            });
+        }break;
+            
+        default:
+            break;
+    }
+}
+
+- (void)cleanGreenScreen{
+    self.greenScreenType = HYRendererGreenScreenTypeNone;
+    if (self.inputPicture) {
+        [self.inputPicture removeAllTargets];
+        self.inputPicture = nil;
+    }
+    if (self.gpuMovie) {
+        [self.gpuMovie removeAllTargets];
+        [self.gpuMovie cancelProcessing];
+        self.gpuMovie = nil;
+    }
 }
 
 - (void)setupNormalProgram {
@@ -91,17 +169,16 @@
         [self.dataInput updateDataFromBytes:bytes size:size];
         CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
         
-        [self.dataInput removeAllTargets];
-        [self.dataInput addTarget:self.filter];
-
-        [self.dataInput processDataForTimestamp:kCMTimeZero];
-        
+        [self.dataInput processData];
         GLuint textureId = self.textureOutput.texture;
         [self convertTextureId:textureId textureSize:size pixelBuffer:pixelBuffer];
-        [self.textureOutput doneWithTexture];
     });
     CVPixelBufferRelease(pixelBuffer);
     return pixelBuffer;
+}
+
+- (void)newFrameReadyFromTextureOutput:(GPUImageTextureOutput *)callbackTextureOutput{
+    [self.textureOutput doneWithTexture];
 }
 
 - (CVPixelBufferRef)convertTextureId:(GLuint)textureId

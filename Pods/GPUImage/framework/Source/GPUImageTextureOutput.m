@@ -44,7 +44,6 @@
 {
     firstInputFramebuffer = newInputFramebuffer;
     [firstInputFramebuffer lock];
-    
     _texture = [firstInputFramebuffer texture];
 }
 

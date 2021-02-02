@@ -61,6 +61,32 @@
                     <view key="view" contentMode="scaleToFill" id="dUk-3t-Jki">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="33C-L2-fJh">
+                                <rect key="frame" x="63" y="138" width="62" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="图片绿幕"/>
+                                <connections>
+                                    <action selector="addPicture:" destination="86j-U6-N8g" eventType="touchUpInside" id="26M-ff-SVH"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GdL-tg-UPL">
+                                <rect key="frame" x="176" y="138" width="62" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="视频绿幕"/>
+                                <connections>
+                                    <action selector="addVideo:" destination="86j-U6-N8g" eventType="touchUpInside" id="9EI-dp-P6L"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W0c-9d-TCX">
+                                <rect key="frame" x="293" y="138" width="62" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="清除背景"/>
+                                <connections>
+                                    <action selector="cleanAll:" destination="86j-U6-N8g" eventType="touchUpInside" id="26a-Mk-CvC"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="mLy-Zd-AN9"/>
                     </view>
@@ -77,6 +103,32 @@
                     <view key="view" contentMode="scaleToFill" id="K3C-zF-x9a">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cMZ-ON-WLD">
+                                <rect key="frame" x="51" y="134" width="62" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="图片绿幕"/>
+                                <connections>
+                                    <action selector="addPicture:" destination="FQb-ut-bWh" eventType="touchUpInside" id="oRE-rF-C2a"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7dt-kT-x0G">
+                                <rect key="frame" x="176" y="134" width="62" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="视频绿幕"/>
+                                <connections>
+                                    <action selector="addVideo:" destination="FQb-ut-bWh" eventType="touchUpInside" id="gqo-2o-shI"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hFb-i5-cj0">
+                                <rect key="frame" x="281" y="134" width="62" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="清除背景"/>
+                                <connections>
+                                    <action selector="cleanAll:" destination="FQb-ut-bWh" eventType="touchUpInside" id="UKj-EM-xZi"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="glu-9T-vhc"/>
                     </view>

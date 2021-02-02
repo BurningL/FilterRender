@@ -50,6 +50,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - 绿幕
 
+- (void)showGreenScreenWithImage:(UIImage *)image;
+
+- (void)showGreenScreenWithVideoUrl:(NSURL *)videoUrl;
+
+- (void)cleanGreenScreen;
+
 
 
 + (HYRenderManager *)shareManager;

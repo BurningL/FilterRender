@@ -26,6 +26,11 @@
     [self setupRecorder];
 }
 
+- (void)dealloc{
+    [[HYRenderManager shareManager] cleanGreenScreen];
+    NSLog(@"RecorderViewController dealloc");
+}
+
 - (void)setupRecorder{
     self.view.bounds = [UIScreen mainScreen].bounds;
     self.gpuView = [[GPUImageView alloc] initWithFrame:self.view.bounds];
@@ -59,6 +64,18 @@
     });
 }
 
+- (IBAction)addPicture:(id)sender {
+    [[HYRenderManager shareManager] showGreenScreenWithImage:[UIImage imageNamed:@"abc2"]];
+}
+
+- (IBAction)addVideo:(id)sender {
+    NSURL *bgUrl = [[NSBundle mainBundle] URLForResource:@"mov_bbb" withExtension:@"mp4"];
+    [[HYRenderManager shareManager] showGreenScreenWithVideoUrl:bgUrl];
+}
+
+- (IBAction)cleanAll:(id)sender {
+    [[HYRenderManager shareManager] cleanGreenScreen];
+}
 
 - (void)startCaputureSession
 {

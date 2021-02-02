@@ -22,6 +22,8 @@
 		DB3B3F4125BEC5F800D713B2 /* HYRenderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DB3B3F4025BEC5F800D713B2 /* HYRenderManager.m */; };
 		DB3B3F4325BFBCA400D713B2 /* greenscreen.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = DB3B3F4225BFBCA400D713B2 /* greenscreen.mp4 */; };
 		DB3B3F4625C0030900D713B2 /* HYVideoCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = DB3B3F4525C0030900D713B2 /* HYVideoCamera.m */; };
+		DB3B3F4B25C67C4C00D713B2 /* GPUImageGreenScreenFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = DB3B3F4A25C67C4C00D713B2 /* GPUImageGreenScreenFilter.m */; };
+		DB67951725C80F6500318BE8 /* mov_bbb.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = DB67951625C80F6500318BE8 /* mov_bbb.mp4 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +55,9 @@
 		DB3B3F4225BFBCA400D713B2 /* greenscreen.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = greenscreen.mp4; sourceTree = "<group>"; };
 		DB3B3F4425C0030900D713B2 /* HYVideoCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HYVideoCamera.h; sourceTree = "<group>"; };
 		DB3B3F4525C0030900D713B2 /* HYVideoCamera.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HYVideoCamera.m; sourceTree = "<group>"; };
+		DB3B3F4925C67C4C00D713B2 /* GPUImageGreenScreenFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GPUImageGreenScreenFilter.h; sourceTree = "<group>"; };
+		DB3B3F4A25C67C4C00D713B2 /* GPUImageGreenScreenFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GPUImageGreenScreenFilter.m; sourceTree = "<group>"; };
+		DB67951625C80F6500318BE8 /* mov_bbb.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = mov_bbb.mp4; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +110,7 @@
 				DB3B3F2A25BEAE0600D713B2 /* Editor */,
 				DB3B3F1925BEAC4100D713B2 /* Main.storyboard */,
 				DB3B3F1C25BEAC4400D713B2 /* Assets.xcassets */,
+				DB67951625C80F6500318BE8 /* mov_bbb.mp4 */,
 				DB3B3F4225BFBCA400D713B2 /* greenscreen.mp4 */,
 				DB3B3F1E25BEAC4400D713B2 /* LaunchScreen.storyboard */,
 				DB3B3F2125BEAC4400D713B2 /* Info.plist */,
@@ -133,6 +139,8 @@
 				DB3B3F4025BEC5F800D713B2 /* HYRenderManager.m */,
 				DB3B3F3C25BEBFD900D713B2 /* HYRenderer.h */,
 				DB3B3F3D25BEBFD900D713B2 /* HYRenderer.m */,
+				DB3B3F4925C67C4C00D713B2 /* GPUImageGreenScreenFilter.h */,
+				DB3B3F4A25C67C4C00D713B2 /* GPUImageGreenScreenFilter.m */,
 			);
 			path = Filter;
 			sourceTree = "<group>";
@@ -216,6 +224,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB67951725C80F6500318BE8 /* mov_bbb.mp4 in Resources */,
 				DB3B3F2025BEAC4400D713B2 /* LaunchScreen.storyboard in Resources */,
 				DB3B3F1D25BEAC4400D713B2 /* Assets.xcassets in Resources */,
 				DB3B3F1B25BEAC4100D713B2 /* Main.storyboard in Resources */,
@@ -280,6 +289,7 @@
 				DB3B3F1225BEAC4100D713B2 /* AppDelegate.m in Sources */,
 				DB3B3F3B25BEB5C000D713B2 /* EditorVideoCompositing.m in Sources */,
 				DB3B3F3225BEB1D800D713B2 /* EditorViewController.m in Sources */,
+				DB3B3F4B25C67C4C00D713B2 /* GPUImageGreenScreenFilter.m in Sources */,
 				DB3B3F2325BEAC4400D713B2 /* main.m in Sources */,
 				DB3B3F3E25BEBFD900D713B2 /* HYRenderer.m in Sources */,
 			);

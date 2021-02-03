@@ -1,6 +1,6 @@
 # FilterRender
 
-相关文章：
+简书博客：
 
 * iOS 关于CVPixelBufferRef的滤镜处理
 
